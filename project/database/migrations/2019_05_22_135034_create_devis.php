@@ -26,7 +26,7 @@ class CreateDevis extends Migration
             $table->float('tva');
             $table->boolean('is_good_for_agreement');
             $table->integer('payment_conditions');
-            $table->boolean('is_validated');
+            $table->boolean('is_validated')->default(0);
             $table->timestamps();
         });
     }
