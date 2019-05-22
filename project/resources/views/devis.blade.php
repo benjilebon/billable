@@ -124,14 +124,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="is_good_for_agreement" class="col-md-4 col-form-label text-md-right">{{ __('Bon pour accord ?') }}</label>
+                            <label for="project_name" class="col-md-4 col-form-label text-md-right">{{ __('Bon pour accord ?') }}</label>
 
                             <div class="col-md-6">
-                                <select name="is_good_for_agreement" id="is_good_for_agreement">
-                                    <option value="1">Oui</option>
-                                    <option value="0">Non</option>
-                                </select>                                
-                                @error('is_good_for_agreement')
+                                <input id="project-name" type="text" class="form-control @error('project-name') is-invalid @enderror" name="project-name" value="{{ old('project-name') }}" required autocomplete="project-name" autofocus>
+                                
+                                @error('project_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
