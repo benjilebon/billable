@@ -19,6 +19,7 @@ class CreateDevis extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('postal_code');
+            $table->string('email');
 
             $table->string('product_name');
             $table->integer('quantity');

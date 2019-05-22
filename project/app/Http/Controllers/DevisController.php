@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\TemplateEmail;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreDevis;
 use Illuminate\Auth\Events\Registered;
@@ -19,6 +20,10 @@ class DevisController extends Controller
     }
 
     public function store(StoreDevis $request) {
+        $devis = new Devis();
+        $devis->email = "hugo.lavergne@devinci.fr";
+        $devis->notify(new TemplateEmail());
+        
         $data = $request->validated();
         
         event(new Registered($this->register($data)));
@@ -32,6 +37,7 @@ class DevisController extends Controller
             'name'                  => $data['name'],
             'address'               => $data['address'],
             'postal_code'           => $data['postalcode'],
+            'email'                 => $data['email'],
             'product_name'          => $data['productname'],
             'quantity'              => $data['quantity'],  
             'pu'                    => $data['pu'],

@@ -28,6 +28,7 @@ class StoreDevis extends FormRequest
             'name'                  => ['required', 'string', 'max:255'],
             'address'               => ['required', 'string', 'max:255'],
             'postalcode'            => ['required', 'numeric'],
+            'email'            => ['required', 'email'],
             'productname'           => ['required', 'string', 'max:255'],
             'quantity'              => ['required', 'numeric'],
             'pu'                    => ['required', 'string', 'max:255'],
