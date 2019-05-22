@@ -42,7 +42,7 @@ class DevisController extends Controller
             'quantity'              => $data['quantity'],  
             'pu'                    => $data['pu'],
             'tva'                   => $data['tva'],
-            'is_good_for_agreement' => $data['is_good_for_agreement'],
+            'project_name'          => $data['project_name'],
             'payment_conditions'    => $data['payment_conditions']  
         ]);
     }

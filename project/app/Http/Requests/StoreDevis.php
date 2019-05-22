@@ -33,7 +33,7 @@ class StoreDevis extends FormRequest
             'quantity'              => ['required', 'numeric'],
             'pu'                    => ['required', 'string', 'max:255'],
             'tva'                   => ['required'],
-            'is_good_for_agreement' => ['required', 'boolean'],
+            'project_name'          => ['required', 'string', 'max:255'],
             'payment_conditions'    => ['required']
         ];
     }
