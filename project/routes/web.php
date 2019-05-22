@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/dashboard', 'UserController@index')->name('dashboard');
+
+Route::get('/devis/create', 'DevisController@index')->name('devis.create');
+Route::post('/devis/create', 'DevisController@store')->name('devis.store');
+
+Auth::routes();
