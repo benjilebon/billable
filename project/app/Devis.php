@@ -12,7 +12,7 @@ class Devis extends Model
     use Notifiable;
 
     protected $fillable = [
-        'corporate', 'name', 'address', 'postal_code', 'email', 'product_name', 'quantity', 'pu', 'tva', 'is_good_for_agreement', 'payment_conditions', 'is_validated'
+        'corporate', 'name', 'address', 'postal_code', 'email', 'product_name', 'quantity', 'pu', 'tva', 'project_name', 'payment_conditions', 'is_validated'
 
     ];
 

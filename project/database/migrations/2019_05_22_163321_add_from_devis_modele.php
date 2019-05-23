@@ -15,7 +15,7 @@ class AddFromDevisModele extends Migration
     {
         Schema::table('devis', function (Blueprint $table) {
             $table->string('project_name');
-            $table->dropColumn('project_name');
+            $table->dropColumn('is_good_for_agreement');
         });
         Schema::table('users', function (Blueprint $table) {
             $table->string('city');
