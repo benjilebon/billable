@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreDevis;
 use Illuminate\Auth\Events\Registered;
 use App\Devis;
+use PDF;
+use Storage;
 
 
 class DevisController extends Controller
@@ -20,11 +22,13 @@ class DevisController extends Controller
     }
 
     public function store(StoreDevis $request) {
-        $devis = new Devis();
-        $devis->email = "hugo.lavergne@devinci.fr";
-        $devis->notify(new TemplateEmail());
-        
+
         $data = $request->validated();
+
+        $devis = new Devis();
+        $devis->email = $data['email'];
+        $devis->notify(new TemplateEmail());
+
         
         event(new Registered($this->register($data)));
 
@@ -32,6 +36,13 @@ class DevisController extends Controller
     }
 
     public function register(array $data) {
+
+        $pdf = PDF::loadView('pdf.devis-pdf');
+
+        $content = $pdf->download()->getOriginalContent();
+
+        Storage::put('public/csv/name.pdf',$content) ;
+
         return Devis::create([
             'corporate'             => $data['corporate'],
             'name'                  => $data['name'],
@@ -42,7 +53,7 @@ class DevisController extends Controller
             'quantity'              => $data['quantity'],  
             'pu'                    => $data['pu'],
             'tva'                   => $data['tva'],
-            'project_name'          => $data['project_name'],
+            'project_name'          => $data['project-name'],
             'payment_conditions'    => $data['payment_conditions']  
         ]);
     }

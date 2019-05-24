@@ -28,12 +28,12 @@ class StoreDevis extends FormRequest
             'name'                  => ['required', 'string', 'max:255'],
             'address'               => ['required', 'string', 'max:255'],
             'postalcode'            => ['required', 'numeric'],
-            'email'            => ['required', 'email'],
+            'email'                 => ['required', 'email'],
             'productname'           => ['required', 'string', 'max:255'],
             'quantity'              => ['required', 'numeric'],
             'pu'                    => ['required', 'string', 'max:255'],
             'tva'                   => ['required'],
-            'project_name'          => ['required', 'string', 'max:255'],
+            'project-name'          => ['required', 'string', 'max:255'],
             'payment_conditions'    => ['required']
         ];
     }

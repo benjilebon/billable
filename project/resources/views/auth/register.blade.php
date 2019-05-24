@@ -54,6 +54,48 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="city" class="col-md-4 col-form-label text-md-right">{{ __("Ville") }}</label>
+
+                            <div class="col-md-6">
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
+
+                                @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="rcs" class="col-md-4 col-form-label text-md-right">{{ __("RCS") }}</label>
+
+                            <div class="col-md-6">
+                                <input id="rcs" type="text" class="form-control @error('rcs') is-invalid @enderror" name="rcs" value="{{ old('rcs') }}" required autocomplete="rcs" autofocus>
+
+                                @error('rcs')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="iban" class="col-md-4 col-form-label text-md-right">{{ __("IBAN") }}</label>
+
+                            <div class="col-md-6">
+                                <input id="iban" type="text" class="form-control @error('iban') is-invalid @enderror" name="iban" value="{{ old('iban') }}" required autocomplete="iban" autofocus>
+
+                                @error('iban')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="website" class="col-md-4 col-form-label text-md-right">{{ __("Site Internet") }}</label>
 
                             <div class="col-md-6">

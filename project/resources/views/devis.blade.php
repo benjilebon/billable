@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="project_name" class="col-md-4 col-form-label text-md-right">{{ __('Bon pour accord ?') }}</label>
+                            <label for="project_name" class="col-md-4 col-form-label text-md-right">{{ __('Nom du projet') }}</label>
 
                             <div class="col-md-6">
                                 <input id="project-name" type="text" class="form-control @error('project-name') is-invalid @enderror" name="project-name" value="{{ old('project-name') }}" required autocomplete="project-name" autofocus>
