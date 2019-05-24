@@ -20,7 +20,7 @@
                 <th scope="col">Adresse</th>
                 <th scope="col">Date</th>
                 <th scope="col">Montant HT</th>
-
+                <th scope="col">Devis signé ?</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +32,14 @@
                     <td>{{ $devis->address }}</td>
                     <td>{{ $devis->created_at }}</td>
                     <td>{{ \App\Devis::find($devis->id)->getTotalHT() }}</td>
+                    {{ Form::open() }}
+                    @if($devis->is_validated == 0)
+                        {{ Form::hidden('devisId', $devis->id, ['id' => 'valide']) }}
+                        <td><button type="submit" class="btn btn-primary" value="1">Valider</a></td>
+                        {{ Form::close() }}
+                    @else
+                        <td>Signé</td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
