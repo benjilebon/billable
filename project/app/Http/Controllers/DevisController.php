@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Devis;
 use PDF;
 use Storage;
+use App\Dossier;
 
 
 class DevisController extends Controller
@@ -41,7 +42,7 @@ class DevisController extends Controller
 
         $content = $pdf->download()->getOriginalContent();
 
-        Storage::put('public/csv/name.pdf',$content) ;
+        Storage::put('public/devis/devis-'.$data['id'].'.pdf', $content);
 
         return Devis::create([
             'corporate'             => $data['corporate'],
@@ -56,5 +57,22 @@ class DevisController extends Controller
             'project_name'          => $data['project-name'],
             'payment_conditions'    => $data['payment_conditions']  
         ]);
+    }
+
+    public function sign(Int $id) {
+        $devis = Devis::find($id);
+
+        $devis->is_validated = 1;
+        $devis->save();
+
+        Dossier::create([
+            'corporate' => $devis->corporate,
+            'name' => $devis->name,
+            'address' => $devis->address,
+            'postal_code' => $devis->postal_code,
+            'devis' => Storage::url('public/devis/devis-'.$devis->id.'.pdf'),
+        ]);
+
+        return redirect(route('dossiers'));
     }
 }

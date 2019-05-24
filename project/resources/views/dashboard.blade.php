@@ -35,7 +35,7 @@
                     {{ Form::open() }}
                     @if($devis->is_validated == 0)
                         {{ Form::hidden('devisId', $devis->id, ['id' => 'valide']) }}
-                        <td><button type="submit" class="btn btn-primary" value="1">Valider</a></td>
+                        <td><a href="{{ route('devis.validate', [$devis->id]) }}"><button type="submit" class="btn btn-primary" value="1">Valider</button></a></td>
                         {{ Form::close() }}
                     @else
                         <td>Signé</td>

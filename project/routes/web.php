@@ -18,4 +18,8 @@ Route::get('/dashboard', 'UserController@index')->name('dashboard');
 Route::get('/devis/create', 'DevisController@index')->name('devis.create');
 Route::post('/devis/create', 'DevisController@store')->name('devis.store');
 
+Route::get('/devis/validate/{id}', 'DevisController@sign')->name('devis.validate');
+
+Route::get('/dossier/all', 'DossierController@index')->name('dossiers');
+
 Auth::routes();
