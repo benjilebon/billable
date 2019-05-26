@@ -18,4 +18,6 @@ Route::get('/dashboard', 'UserController@index')->name('dashboard');
 Route::get('/devis/create', 'DevisController@index')->name('devis.create');
 Route::post('/devis/create', 'DevisController@store')->name('devis.store');
 
+Route::get('/template-devis', 'HomeController@devis')->name('templates.devisTemplate');
+
 Auth::routes();
