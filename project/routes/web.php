@@ -20,4 +20,8 @@ Route::post('/devis/create', 'DevisController@store')->name('devis.store');
 
 Route::get('/template-devis', 'HomeController@devis')->name('templates.devisTemplate');
 
+Route::get('/devis/validate/{id}', 'DevisController@sign')->name('devis.validate');
+
+Route::get('/dossier/all', 'DossierController@index')->name('dossiers');
+
 Auth::routes();
