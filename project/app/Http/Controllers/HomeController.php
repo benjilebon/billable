@@ -29,4 +29,8 @@ class HomeController extends Controller
     public function devis() {
         return view('templates.devisTemplate');
     }
+
+    public function facture() {
+        return view('templates.factureTemplate');
+    }
 }
