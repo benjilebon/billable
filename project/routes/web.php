@@ -24,6 +24,6 @@ Route::get('/template-facture', 'HomeController@facture')->name('templates.factu
 
 Route::get('/devis/validate/{id}', 'DevisController@sign')->name('devis.validate');
 
-Route::get('/dossier/all', 'DossierController@index')->name('dossiers');
+Route::get('/dossiers/all', 'DossierController@index')->name('dossiers');
 
 Auth::routes();

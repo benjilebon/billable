@@ -42,9 +42,8 @@ class DevisController extends Controller
 
         $content = $pdf->download()->getOriginalContent();
 
-        Storage::put('public/devis/devis-'.$data['id'].'.pdf', $content);
-
-        return Devis::create([
+        
+        $devis =  Devis::create([
             'corporate'             => $data['corporate'],
             'name'                  => $data['name'],
             'address'               => $data['address'],
@@ -56,11 +55,17 @@ class DevisController extends Controller
             'tva'                   => $data['tva'],
             'project_name'          => $data['project-name'],
             'payment_conditions'    => $data['payment_conditions']  
-        ]);
-    }
+            ]);
 
-    public function sign(Int $id) {
-        $devis = Devis::find($id);
+
+            Storage::put('public/devis/devis-'.$devis->id.'.pdf', $content);
+
+            return $devis;
+
+        }
+        
+        public function sign(Int $id) {
+            $devis = Devis::find($id);
 
         $devis->is_validated = 1;
         $devis->save();
