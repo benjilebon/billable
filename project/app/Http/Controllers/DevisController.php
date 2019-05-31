@@ -7,41 +7,38 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreDevis;
 use Illuminate\Auth\Events\Registered;
 use App\Devis;
-use PDF;
-use Storage;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Dossier;
 
 
 class DevisController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('devis');
     }
 
-    public function redirectTo() {
+    public function redirectTo()
+    {
         return route('dashboard');
     }
 
-    public function store(StoreDevis $request) {
+    public function store(StoreDevis $request)
+    {
+
 
         $data = $request->validated();
 
         $devis = new Devis();
         $devis->email = $data['email'];
+
+
         $devis->notify(new TemplateEmail());
 
-        
-        event(new Registered($this->register($data)));
-
-        return redirect($this->redirectTo());
-    }
-
-    public function register(array $data) {
-
-        
-        
-        
-        $devis =  Devis::create([
+        //event(new Registered($this->register($data)));
+        $devis = Devis::create([
             'corporate'             => $data['corporate'],
             'name'                  => $data['name'],
             'address'               => $data['address'],
@@ -58,17 +55,14 @@ class DevisController extends Controller
             'rcs'                   => $data['rcs'],
             'intra_community_tva'   => $data['intracommunitytva'],
             'city'                  => $data['city'],
-            ]);
+        ]);
+//        $pdf = PDF::loadView('templates.devisTemplate', ['devis' => $devis]);
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadView('templates.devisTemplate', ['devis' => $devis]);
+//oad()->getOriginalContent();
+        return $pdf->stream();
             
-            $pdf = PDF::loadView('templates.devis', ['devis' => $devis]);
-
-            $content = $pdf->download()->getOriginalContent();
-            
-            Storage::put('public/devis/devis-'.$devis->id.'.pdf', $content);
-            
-            return $devis;
-            
-        }
+    }
         
         public function sign(Int $id) {
             $devis = Devis::find($id);
