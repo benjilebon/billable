@@ -15,15 +15,22 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'UserController@index')->name('dashboard');
 
-Route::get('/devis/create', 'DevisController@index')->name('devis.create');
-Route::post('/devis/create', 'DevisController@store')->name('devis.store');
 
-Route::get('/template-devis', 'HomeController@devis')->name('templates.devisTemplate');
+
+Route::get('/template-devis', 'DevisTemplateController@index', function (){
+
+})->name('templates.devisTemplate');
 
 Route::get('/template-facture', 'HomeController@facture')->name('templates.factureTemplate');
 
-Route::get('/devis/validate/{id}', 'DevisController@sign')->name('devis.validate');
+
 
 Route::get('/dossiers/all', 'DossierController@index')->name('dossiers');
+
+Route::group(['prefix' => '/devis'], function () {
+    Route::get('/create', 'DevisController@index')->name('devis.create');
+    Route::post('/create', 'DevisController@store')->name('devis.store');
+    Route::get('/validate/{id}', 'DevisController@sign')->name('devis.validate');
+});
 
 Auth::routes();
