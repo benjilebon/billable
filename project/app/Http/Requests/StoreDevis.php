@@ -34,7 +34,12 @@ class StoreDevis extends FormRequest
             'pu'                    => ['required', 'string', 'max:255'],
             'tva'                   => ['required'],
             'project-name'          => ['required', 'string', 'max:255'],
-            'payment_conditions'    => ['required']
+            'payment_conditions'    => ['required'],
+            'contact'               => ['required', 'email'],
+            'phone'                 => ['required', 'numeric'],                
+            'rcs'                   => ['required', 'string'],
+            'intracommunitytva'     => ['required', 'string'],
+            'city'                  => ['required', 'string'],
         ];
     }
 }

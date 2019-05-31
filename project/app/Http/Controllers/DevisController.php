@@ -38,10 +38,8 @@ class DevisController extends Controller
 
     public function register(array $data) {
 
-        $pdf = PDF::loadView('pdf.devis-pdf');
-
-        $content = $pdf->download()->getOriginalContent();
-
+        
+        
         
         $devis =  Devis::create([
             'corporate'             => $data['corporate'],
@@ -54,14 +52,22 @@ class DevisController extends Controller
             'pu'                    => $data['pu'],
             'tva'                   => $data['tva'],
             'project_name'          => $data['project-name'],
-            'payment_conditions'    => $data['payment_conditions']  
+            'payment_conditions'    => $data['payment_conditions'],
+            'contact'               => $data['contact'],
+            'phone'                 => $data['phone'],
+            'rcs'                   => $data['rcs'],
+            'intra_community_tva'   => $data['intracommunitytva'],
+            'city'                  => $data['city'],
             ]);
+            
+            $pdf = PDF::loadView('templates.devis', ['devis' => $devis]);
 
-
+            $content = $pdf->download()->getOriginalContent();
+            
             Storage::put('public/devis/devis-'.$devis->id.'.pdf', $content);
-
+            
             return $devis;
-
+            
         }
         
         public function sign(Int $id) {
@@ -76,6 +82,7 @@ class DevisController extends Controller
             'address' => $devis->address,
             'postal_code' => $devis->postal_code,
             'devis' => Storage::url('public/devis/devis-'.$devis->id.'.pdf'),
+            'devis_id' => $devis->id
         ]);
 
         return redirect(route('dossiers'));

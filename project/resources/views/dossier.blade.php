@@ -30,8 +30,8 @@
                     <td>{{ $dossier->name }}</td>
                     <td>{{ $dossier->address }}</td>
                     <td>{{ $dossier->created_at }}</td>
-                    <td><a class="btn btn-primary" href="{{ url('/storage/devis/devis-'.\Auth::user()->id.'.pdf') }}">Devis (PDF)</a></td>
-                    <td><a href="">Terminer le projet et éditer une facture</a> </td>
+                    <td><a class="btn btn-primary" href="{{ url($dossier->devis) }}">Devis (PDF)</a></td>
+                    <td><a href="{{ route('facture.generate', [$dossier->id]) }}">Terminer le projet et éditer une facture</a> </td>
                 </tr>
             @endforeach
         </tbody>

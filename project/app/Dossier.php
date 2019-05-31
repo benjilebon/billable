@@ -10,7 +10,7 @@ class Dossier extends Model
     public $table = 'dossier';
 
     protected $fillable = [
-        'corporate', 'name', 'address', 'postal_code', 'devis', 'facture'
+        'corporate', 'name', 'address', 'postal_code', 'devis', 'facture', 'devis_id'
     ];
 
     protected $dates = [

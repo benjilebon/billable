@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>  
-  
+        {{-- //TODO: Add create devis button --}}
         <div class="col-4">
           <div class="inforide" style="box-shadow: 1px 51px 208px -27px rgba(0,0,0,0.43); border-radius:8px; margin:15px;">
             <div class="row" style="border-radius:8px;">
