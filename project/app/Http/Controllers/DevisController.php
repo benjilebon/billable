@@ -51,7 +51,6 @@ class DevisController extends Controller
             'project_name' => $data['project-name'],
             'payment_conditions' => $data['payment_conditions']
         ]);
-
 //        $pdf = PDF::loadView('templates.devisTemplate', ['devis' => $devis]);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('templates.devisTemplate', ['devis' => $devis]);
