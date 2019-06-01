@@ -218,8 +218,8 @@
     
                                 <div class="col-md-6">
                                     <select name="payment_conditions" id="payment_conditions">
-                                        <option value="0">jsp</option>
-                                        <option value="1">lol</option>
+                                        <option value="0">Acompte à la signature</option>
+                                        <option value="1">Paiement comptant</option>
                                     </select>                                
                                     @error('payment_conditions')
                                         <span class="invalid-feedback" role="alert">

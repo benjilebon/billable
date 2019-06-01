@@ -27,28 +27,28 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row" style="border:1px solid black;">............</th>
-            <td style="border:1px solid black;">€</td>
-            <td style="border:1px solid black;">1</td>
-            <td style="border:1px solid black;">€</td>
+            <th scope="row" style="border:1px solid black;">{{$devis->produit}}</th>
+            <td style="border:1px solid black;">{{ $devis->pu }}€</td>
+            <td style="border:1px solid black;">{{ $devis->quantity }}</td>
+            <td style="border:1px solid black;">{{$devis->price}}</td>
           </tr>
           <tr>
             <th scope="row" style="border:1px solid black;">Total Hors taxes</th>
             <td style="border:1px solid black;"></td>
             <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;">TODO</td>
+            <td style="border:1px solid black;">{{$devis->getTotalHT()}}</td>
           </tr>
           <tr>
-            <th scope="row" style="border:1px solid black;">TVA (20%)</th>
+            <th scope="row" style="border:1px solid black;">TVA</th>
             <td style="border:1px solid black;"></td>
             <td style="border:1px solid black;"></td>
-            <td style="border:1px solid black;">{{ $devis->tva }}</td>
+            <td style="border:1px solid black;">{{ $devis->tva }}%</td>
           </tr>
           <tr style="background-color:#e9ecef;">
-            <th scope="row" style="border-bottom:1px solid black; border-left:1px solid black;">Net à payer TTC</th>
+            <th scope="row" style="border-bottom:1px solid black; border-left:1px solid black;">Total TTC</th>
             <td style="border-bottom:1px solid black;"></td>
             <td style="border-bottom:1px solid black;"></td>
-            <td style="border:1px solid black;">TODO</td>
+            <td style="border:1px solid black;">{{ $devis->getTotalTTC }}</td>
           </tr>
         </tbody>
       </table><br><br>
@@ -62,21 +62,21 @@
           <p style="line-height:0.5; font-weight:bold;">Nom de la société: {{ $devis->corporate }}</p>
           <p style="line-height:0.5;">Adresse du client: {{ $devis->address }}</p>
           <p style="line-height:0.5;">Code postal: {{ $devis->postal_code }}</p>
-          <p style="line-height:0.5;">RCS</p><br>
+          <p style="line-height:0.5;">RCS: {{ $devis->rcs }}</p><br>
           <div class="row">
           <div class="col">
                 <p style="line-height:0.5;">Cordonnées Bancaires</p>
-                <p style="line-height:0.5;">IBAN : TODO</p>
+                <p style="line-height:0.5;">IBAN : {{ $devis->iban }}</p>
           </div> 
           <div class="col">
-                <p style="line-height:0.5;">Tél :TODO</p>
-                <p style="line-height:0.5;">Mobile :TODO</p>
+                <p style="line-height:0.5;">Tél :{{$devis->phone}}</p>
+                <p style="line-height:0.5;">Mobile :{{$devis->phone}}</p>
                 <p style="line-height:0.5;">Mail : {{ $devis->email }}</p>
           </div>
         </div>   
       </div><br><br>
-      <div style="line-height:normal;">Conditions de règlement : TODO PAYMENT CONDITION ?</div>
-      <small style="line-height:normal;">Pour toute commande dont le montant s’élève à plus de trois milles euros hors taxe, un acompte de 30% ( trentes pourcents) est
+      <div style="line-height:normal;">Conditions de règlement : {{ $devis->payment_conditions }}</div>
+      <small style="line-height:normal;">Pour toute commande dont le montant s’élève à plus de trois milles euros (3 000€) hors taxes, un acompte de 30% ( trentes pourcents) est
             facturé. 50% (cinquantes pourcents) pourront être facturés au cours du projet, répartis sur un certain nombre de jalons.
             10% (dix pourcents) lors de la livraison. 10% (dix pourcents) après recette /validation."</small>     
     </div>                

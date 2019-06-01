@@ -43,6 +43,7 @@ class FactureController extends Controller
     public function register(array $data, Int $id) {
 
         $dossier = Dossier::find($id);
+        $devis = Devis::find($dossier->devis_id);
 
         $facture = Facture::create([
             'client_address' => $data['clientaddress'],
@@ -52,7 +53,7 @@ class FactureController extends Controller
         
         
 
-        $pdf = PDF::loadView('templates.factureTemplate', ['dossier' => $dossier, 'data' => $data]);
+        $pdf = PDF::loadView('templates.factureTemplate', ['dossier' => $dossier, 'data' => $data, 'facture' => $facture, 'devis' => $devis]);
         $content = $pdf->download()->getOriginalContent();
         Storage::put('public/facture/facture-'.$facture->id.'.pdf', $content);
 

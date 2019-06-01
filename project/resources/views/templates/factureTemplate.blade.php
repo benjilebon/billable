@@ -1,10 +1,11 @@
+
 <div class="container">
     <div class="row">
         <div class="col">
             <h1 style="line-height:0.5;">FACTURE</h1>
-            <h3>N°:#</h3><br>
-            <p style="line-height:0.5;">PO :</p>
-            <p style="line-height:0.5;">Date :</p>
+            <h3>N°:{{ $devis->id }}</h3><br>
+            <p style="line-height:0.5;">PO : 0516245</p>
+            <p style="line-height:0.5;">Date : {{ $facture->created_at }}</p>
         </div>
         <div class="col text-center">
             <img src="https://fakeimg.pl/100x100/">
@@ -13,24 +14,24 @@
     <div class="row">
         <div class="col-4"></div>
         <div class="col-8">
-            <p style="line-height:0.5;">CLIENT :</p>
-            <p style="line-height:0.5;">Contact :</p>
-            <p style="line-height:0.5;">Projet :</p>
+            <p style="line-height:0.5;">CLIENT : {{ $data['clientname'] }}</p>
+            <p style="line-height:0.5;">Contact : {{ $data['contact'] }}</p>
+            <p style="line-height:0.5;">Projet : {{ $data['projectname'] }}</p>
         </div>
     </div><br>
     <div class="row">
         <div class="col-4">
-            <p class="para">(Nom de la société)</p><br>
-            <p class="para">(Adresse société)</p>
-            <p class="para">(CP société) - (Ville société) (Pays)</p><br>
-            <p class="para">Tél :</p>
-            <p class="para">Mobile :</p><br>
-            <p class="para">Mail :</p><br> 
+            <p class="para">{{ $data['corporate'] }}</p><br>
+            <p class="para">{{ $data['address'] }}</p>
+            <p class="para">{{ $data['postalcode'] }} - {{ $data['city'] }} FRANCE</p><br>
+            <p class="para">Tél : {{ $data['phone'] }}</p>
+            <p class="para">Mobile : {{ $data['phone'] }}</p><br>
+            <p class="para">Mail : {{ $data['email'] }}</p><br> 
             <p class="para">Dénomination juridique</p>
-            <p class="para">RCS xxxx xxxx xxxx - Ville</p>
-            <p class="para">TVA INTRA : FR xx xxxxxxxxxx *</p><br>
-            <p class="para">URL de la société</p><br>
-            <small>Le délai de paiement de cette Facture est de, sept (x) jours, à compter de sa date d'édition.</small> 
+            <p class="para">RCS {{ $data['rcs'] }} - {{ $data['city'] }}</p>
+            <p class="para">TVA INTRA : {{ $data['intracommunitytva'] }}</p><br>
+            <p class="para">{{ $data['corporate'] }}.fr</p><br>
+            <small>Le délai de paiement de cette Facture est de, un (1) mois, à compter de sa date d'édition.</small> 
         </div>
         <div class="col-8">
     <table class="table">
@@ -44,26 +45,26 @@
           <tr>
             <th scope="row" style="border:1px solid black; height: 350px;">
                 Désignation de la/ Les prestations réalisées<br>
-                - ...... <br>
+                - {{ $devis->productname }} <br>
                 - ....... <br>
                 - ...... <br>
                 - ....... <br>
                 - ...... <br>
                 - ....... <br>
             </th>
-            <td style="border:1px solid black;">0,00 €</td>
+            <td style="border:1px solid black;">{{ $devis->pu }} €</td>
           </tr>
           <tr>
             <th scope="row" style="border:1px solid black;">Hors taxes</th>
-            <td style="border:1px solid black;">0,00 €</td>
+            <td style="border:1px solid black;">{{ $devis->getTotalHT() }} €</td>
           </tr>
           <tr>
-            <th scope="row" style="border:1px solid black;">TVA (20%)</th>
-            <td style="border:1px solid black;">0,00 €</td>
+            <th scope="row" style="border:1px solid black;">TVA ({{$devis->tva}})</th>
+            <td style="border:1px solid black;">{{$devis->getTotalTTC()}} €</td>
           </tr>
           <tr style="background-color:#e9ecef;">
-            <th scope="row" style="border-bottom:1px solid black; border-left:1px solid black;">Net à payer TTC</th>
-            <td style="border:1px solid black;">0.00€</td>
+            <th scope="row" style="border-bottom:1px solid black; border-left:1px solid black;">Total TTC</th>
+            <td style="border:1px solid black;">{{$devis->getTotalTTC()}}€</td>
           </tr>
         </tbody>
       </table>
