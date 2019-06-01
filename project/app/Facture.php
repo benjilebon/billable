@@ -15,7 +15,7 @@ class Facture extends Model
     ];
 
     public function getRelance() {
-        return $this->created_at->addDays(15)->diffForHumans();
+        return $this->created_at->addDays(15*$this->status+1)->diffForHumans();
     }
 
     protected $dates = [
