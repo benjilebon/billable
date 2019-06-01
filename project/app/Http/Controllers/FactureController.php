@@ -6,27 +6,34 @@ use Illuminate\Http\Request;
 use App\Devis;
 use App\Dossier;
 use App\Http\Requests\StoreFacture;
+use Illuminate\Auth\Events\Registered;
+use App\Facture;
+use PDF;
+use Storage;
 
 class FactureController extends Controller
 {
     public function index(Int $id) {
         $dossier = Dossier::find($id);
         $devis = Devis::find($dossier->devis_id);
-        dd($devis);
+
         return view('facture', [
             'devis' => $devis,
             'dossier' => $dossier
         ]);
     }
 
+    public function redirectTo() {
+        return route('dossiers');
+    }
+
     public function store(Int $id, StoreFacture $request) {
 
         $data = $request->validated();
 
-        // $devis = new Devis();
-        // $devis->email = $data['email'];
-        // $devis->notify(new TemplateEmail());
-
+        $facture = new Facture();
+        $facture->email = $data['email'];
+        $facture->notify(new TemplateEmail());
         
         event(new Registered($this->register($data, $id)));
 
@@ -35,17 +42,23 @@ class FactureController extends Controller
 
     public function register(array $data, Int $id) {
 
-        $devis = Devis::find($id);
+        $dossier = Dossier::find($id);
 
         $facture = Facture::create([
-            'client_address' => $data['clientaddress']
+            'client_address' => $data['clientaddress'],
+            'status' => 0,
         ]);
 
-        $pdf = PDF::loadView('templates.facture', ['devis' => $devis, 'data' => $data]);
+        
+        
 
+        $pdf = PDF::loadView('templates.factureTemplate', ['dossier' => $dossier, 'data' => $data]);
         $content = $pdf->download()->getOriginalContent();
-
         Storage::put('public/facture/facture-'.$facture->id.'.pdf', $content);
+
+        $dossier->facture = Storage::url('public/facture/facture-'.$facture->id.'.pdf');
+        $dossier->facture_id = $facture->id;
+        $dossier->save();
 
         return $facture;
     }

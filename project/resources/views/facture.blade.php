@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('devis.store') }}">
+                    <form method="POST" action="{{ route('facture.create', [$dossier->id]) }}">
                         @csrf
 
                         <div class="form-group row">

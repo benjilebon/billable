@@ -27,8 +27,6 @@ class DevisController extends Controller
 
     public function store(StoreDevis $request)
     {
-
-
         $data = $request->validated();
 
         $devis = new Devis();
@@ -56,19 +54,21 @@ class DevisController extends Controller
             'intra_community_tva'   => $data['intracommunitytva'],
             'city'                  => $data['city'],
         ]);
-//        $pdf = PDF::loadView('templates.devisTemplate', ['devis' => $devis]);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('templates.devisTemplate', ['devis' => $devis]);
-//oad()->getOriginalContent();
-        return $pdf->stream();
-            
+
+        $content = $pdf->download()->getOriginalContent();
+
+        Storage::put('public/devis/devis-'.$devis->id.'.pdf', $content);
+
+        return redirect($this->redirectTo());
     }
         
         public function sign(Int $id) {
             $devis = Devis::find($id);
 
-        $devis->is_validated = 1;
-        $devis->save();
+            $devis->is_validated = 1;
+            $devis->save();
 
         Dossier::create([
             'corporate' => $devis->corporate,

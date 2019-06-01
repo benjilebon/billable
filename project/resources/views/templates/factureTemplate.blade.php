@@ -1,7 +1,3 @@
-@extends('layouts.app')
-
-
-@section('content')
 <div class="container">
     <div class="row">
         <div class="col">
@@ -80,7 +76,6 @@
       <small style="line-height:normal;">Toute somme qui n’aura pas été réglée par le Client dans les délais mentionnés ci-dessus et ce, à compter de la date de facturation;
         portera intérêt de retard au taux de dix pourcent (10%) par jour de retard conformément à l'article L. 441-6 du Code de commerce</small>     
     </div>                
-@endsection
 <style>
     p {
         font-size:18px;

@@ -20,6 +20,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Devis</th>
                 <th scope="col">Facture</th>
+                <th scope="col">Paiement</th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +32,12 @@
                     <td>{{ $dossier->address }}</td>
                     <td>{{ $dossier->created_at }}</td>
                     <td><a class="btn btn-primary" href="{{ url($dossier->devis) }}">Devis (PDF)</a></td>
-                    <td><a href="{{ route('facture.generate', [$dossier->id]) }}">Terminer le projet et éditer une facture</a> </td>
+                    @if ($dossier->facture != null)
+                        <td><a class="btn btn-primary" href="{{ url($dossier->facture) }}">Facture (PDF)</a></td>
+                        <td><span class="badge badge-warning">Relance {{ \App\Facture::find($dossier->facture_id)->getRelance() }}</span><a class="btn btn-primary" href="#">Valider le paiement</a></td>
+                    @else
+                        <td><a href="{{ route('facture.generate', [$dossier->id]) }}">Terminer le projet et éditer une facture</a> </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>

@@ -13,7 +13,7 @@ class StoreFacture extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,15 +24,15 @@ class StoreFacture extends FormRequest
     public function rules()
     {
         return [
-            'clientname'            => ['required', 'email'],            
-            'clientaddress'         => ['required', 'email'],             
+            'clientname'            => ['required'],            
+            'clientaddress'         => ['required'],             
             'contact'               => ['required', 'email'],         
-            'projectname'           => ['required', 'string', 'max:255'],             
-            'corporate'             => ['required', 'string', 'max:255'],         
-            'address'               => ['required', 'string', 'max:255'],         
-            'postalcode'            => ['required', 'number'],             
+            'projectname'           => ['required', 'string'],             
+            'corporate'             => ['required', 'string'],         
+            'address'               => ['required', 'string'],         
+            'postalcode'            => ['required', 'numeric'],             
             'city'                  => ['required', 'string'],     
-            'phone'                 => ['required', 'number'],     
+            'phone'                 => ['required', 'numeric'],     
             'email'                 => ['required', 'email'],     
             'rcs'                   => ['required', 'string'],     
             'intracommunitytva'     => ['required', 'string']                 
