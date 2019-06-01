@@ -5,11 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Éditer une facture') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('facture.create', [$dossier->id]) }}">
                         @csrf
+
+                        <h2>Informations du client</h2>
 
                         <div class="form-group row">
                             <label for="clientname" class="col-md-4 col-form-label text-md-right">{{ __("Nom du client") }}</label>
@@ -40,7 +42,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="contact" class="col-md-4 col-form-label text-md-right">{{ __("Contact (email)") }}</label>
+                            <label for="contact" class="col-md-4 col-form-label text-md-right">{{ __("Contact du client (email)") }}</label>
 
                             <div class="col-md-6">
                                 <input id="contact" type="text" class="form-control @error('contact') is-invalid @enderror" name="contact" value="{{ $devis->contact }}" required autocomplete="contact" autofocus>
@@ -66,6 +68,11 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <br>
+                        <br>
+
+                        <h2>Informations sur la société cliente</h2>
 
                         <div class="form-group row">
                             <label for="corporate" class="col-md-4 col-form-label text-md-right">{{ __("Nom de la société") }}</label>
@@ -122,7 +129,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __("Ville") }}</label>
+                            <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __("Téléphone de la société") }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="numeric" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ $devis->phone }}" required autocomplete="phone" autofocus>
@@ -135,7 +142,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __("Email") }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __("Email de la société") }}</label>
                             <div class="col-md-6">
                                 <input id="email" type="email"  class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $devis->email }}" required autocomplete="email" autofocus>
                                 @error('email')
@@ -147,7 +154,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="rcs" class="col-md-4 col-form-label text-md-right">{{ __("Ville") }}</label>
+                            <label for="rcs" class="col-md-4 col-form-label text-md-right">{{ __("RCS") }}</label>
 
                             <div class="col-md-6">
                                 <input id="rcs" type="text" class="form-control @error('rcs') is-invalid @enderror" name="rcs" value="{{ $devis->rcs }}" required autocomplete="rcs" autofocus>
@@ -160,7 +167,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="intracommunitytva" class="col-md-4 col-form-label text-md-right">{{ __("Ville") }}</label>
+                            <label for="intracommunitytva" class="col-md-4 col-form-label text-md-right">{{ __("N° TVA INTRACOMMUNAUTAIRE") }}</label>
 
                             <div class="col-md-6">
                                 <input id="intracommunitytva" type="text" class="form-control @error('intracommunitytva') is-invalid @enderror" name="intracommunitytva" value="{{ $devis->intra_community_tva }}" required autocomplete="intracommunitytva" autofocus>
@@ -175,7 +182,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Enregistrer et générer la facture') }}
                                 </button>
                             </div>
                         </div>

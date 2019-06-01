@@ -11,8 +11,8 @@
               <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideone" style="background-color:#6CC785;">
               </div>
               <div class="col-lg-9 col-md-8 col-sm-8 col-8 text-center" style="padding:10px; background-color:white;">
-                  <h4>Devis</h4>
-                  <h2>00</h2>
+                  <h4>Devis non validés</h4>
+                  <h2>{{ $devis->count() }}</h2>
               </div>
             </div>
           </div></a>
@@ -24,13 +24,12 @@
               <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideone" style="background-color:#9A75FE;">
               </div>
               <div class="col-lg-9 col-md-8 col-sm-8 col-8 text-center" style="padding:10px; background-color:white;">
-                  <h4>Dossiers</h4>
-                  <h2>00</h2>
+                  <h4>Dossiers ouverts</h4>
+                  <h2>{{ $facture->count() }}</h2>
               </div>
             </div>
           </div>
         </div>  
-        {{-- //TODO: Add create devis button --}}
         <div class="col-4">
           <div class="inforide" style="box-shadow: 1px 51px 208px -27px rgba(0,0,0,0.43); border-radius:8px; margin:15px;">
             <div class="row" style="border-radius:8px;">
@@ -38,7 +37,7 @@
               </div>
               <div class="col-lg-9 col-md-8 col-sm-8 col-8 text-center" style="padding:10px; background-color:white;">
                   <h4>Clients</h4>
-                  <h2>00</h2>
+                  <h2>{{ $dossier->count() }}</h2>
               </div>
             </div>
           </div>
@@ -50,7 +49,7 @@
 
 <div class="container"> 
   
-<!------------------ DEVIS EN ATTENTE  ----------------------------->
+
     <p style="background-color: #6CC785; padding:5px; color:white; margin-top:50px;" class="text-center">DEVIS</p>
   
         @if (!empty($devis))
@@ -64,6 +63,7 @@
                     <th scope="col">Adresse</th>
                     <th scope="col">Date</th>
                     <th scope="col">Montant HT</th>
+                    <th scope="col">Consulter</th>
                     <th scope="col">Devis signé ?</th>
                 </tr>
             </thead>
@@ -76,6 +76,7 @@
                         <td>{{ $devis->address }}</td>
                         <td>{{ $devis->created_at }}</td>
                         <td>{{ \App\Devis::find($devis->id)->getTotalHT() }}</td>
+                        <td><a class="btn btn-primary" href="{{ url(Storage::url('public/devis/devis-'.$devis->id.'.pdf')) }}">Devis (PDF)</a></td>
                         {{ Form::open() }}
                         @if($devis->is_validated == 0)
                             {{ Form::hidden('devisId', $devis->id, ['id' => 'valide']) }}
@@ -94,7 +95,6 @@
         <p>Vous n'avez aucun devis en attente de validation</p>
 
         @endif
-<!------------------ DOSSIER OUVERT ----------------------------->
         <div style="border:1px solid grey; margin:50Px;"></div>
         <p style="background-color: rgb(154, 117, 254); padding:5px; color:white; margin-top:50px;" class="text-center">DOSSIERS</p>
 
@@ -114,46 +114,10 @@
                         <td>...</td>
                         <td>...</td>
                         <td>...</td>
-                        <td><input type="button" class="btn btn-primary" value="Voir"></td>
+                        <td><a class="btn btn-primary" href="{{ route('dossiers') }}">Voir</a></td>
                     </tr>
             </tbody>
         </table>
 
-<!------------------ CLIENTS ----------------------------->
-<div style="border:1px solid grey; margin:50Px;"></div>
-      <p style="background-color: #4EBCE5; padding:5px; color:white; margin-top:50px;" class="text-center">CLIENTS</p>
-
-        <table class="table" style="margin-top:-15px;">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Entreprise</th>
-                    <th scope="col">Adresse</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                        <th scope="col">...</th>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td><input type="button" class="btn btn-primary" value="Voir"></td>
-                    </tr>
-            </tbody>
-        </table>
-      </div>
-</div><br><br>
-<div class="bottom section-padding" style="padding: 60px 0; background-color: black;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="copyright" style="color: #e5e5e5;font-weight: 600;">
-                    <p style="margin-bottom: 0;line-height: 50px;font-size: 16px;font-weight: 400;">© <span style="color: #d1caca;">2019</span> Billable Tous droits réservés.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>  
+</div>
 @endsection

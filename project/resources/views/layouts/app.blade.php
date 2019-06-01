@@ -36,7 +36,8 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     @if(Auth::user())
-                        <li><a href="{{ route('devis.create') }}">Créer un devis</a></li>
+                        <li><a class="btn btn-primary mr-4" href="{{ route('devis.create') }}">Créer un devis</a></li>
+                        <li><a class="btn btn-primary" href="{{ route('dossiers') }}">Voir mes dossiers</a></li>
                     @endif
                 </ul>
 
@@ -84,6 +85,20 @@
     <main class="py-4">
         @yield('content')
     </main>
+    <footer>
+            <br><br>
+            <div class="bottom section-padding" style="padding: 60px 0; background-color: black;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <div class="copyright" style="color: #e5e5e5;font-weight: 600;">
+                                    <p style="margin-bottom: 0;line-height: 50px;font-size: 16px;font-weight: 400;">© <span style="color: #d1caca;">2019</span> Billable Tous droits réservés.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+    </footer>
 </div>
 </body>
 </html>

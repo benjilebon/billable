@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col">
             <h1 style="line-height:0.5;">Devis</h1>
-            <h3>{{ $devis->id }}</h3><br>
+            <h3>I-467-2019-{{ $devis->id }}</h3><br>
             <p style="line-height:0.5;">Nom client: {{ $devis->name }}</p>
             <p style="line-height:0.5;">Email client: {{ $devis->email }}</p>
             <p style="line-height:0.5;">Nom du projet: {{ $devis->project_name }}</p>
@@ -48,7 +48,7 @@
             <th scope="row" style="border-bottom:1px solid black; border-left:1px solid black;">Total TTC</th>
             <td style="border-bottom:1px solid black;"></td>
             <td style="border-bottom:1px solid black;"></td>
-            <td style="border:1px solid black;">{{ $devis->getTotalTTC }}</td>
+            <td style="border:1px solid black;">{{ $devis->getTotalTTC() }}</td>
           </tr>
         </tbody>
       </table><br><br>
@@ -60,14 +60,10 @@
       
       <div style="border: 1px dashed black; padding:20px;">
           <p style="line-height:0.5; font-weight:bold;">Nom de la société: {{ $devis->corporate }}</p>
-          <p style="line-height:0.5;">Adresse du client: {{ $devis->address }}</p>
+          <p style="line-height:0.5;">Adresse de la société: {{ $devis->address }} - {{ $devis->city }}</p>
           <p style="line-height:0.5;">Code postal: {{ $devis->postal_code }}</p>
           <p style="line-height:0.5;">RCS: {{ $devis->rcs }}</p><br>
           <div class="row">
-          <div class="col">
-                <p style="line-height:0.5;">Cordonnées Bancaires</p>
-                <p style="line-height:0.5;">IBAN : {{ $devis->iban }}</p>
-          </div> 
           <div class="col">
                 <p style="line-height:0.5;">Tél :{{$devis->phone}}</p>
                 <p style="line-height:0.5;">Mobile :{{$devis->phone}}</p>
@@ -75,7 +71,7 @@
           </div>
         </div>   
       </div><br><br>
-      <div style="line-height:normal;">Conditions de règlement : {{ $devis->payment_conditions }}</div>
+      <div style="line-height:normal;">Conditions de règlement : {{ $devis->paymentConditionsAsString() }}</div>
       <small style="line-height:normal;">Pour toute commande dont le montant s’élève à plus de trois milles euros (3 000€) hors taxes, un acompte de 30% ( trentes pourcents) est
             facturé. 50% (cinquantes pourcents) pourront être facturés au cours du projet, répartis sur un certain nombre de jalons.
             10% (dix pourcents) lors de la livraison. 10% (dix pourcents) après recette /validation."</small>     

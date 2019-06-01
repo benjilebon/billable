@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col">
             <h1 style="line-height:0.5;">FACTURE</h1>
-            <h3>N°:{{ $devis->id }}</h3><br>
+            <h3>N°: I-467-2019-{{ $devis->id }}</h3><br>
             <p style="line-height:0.5;">PO : 0516245</p>
             <p style="line-height:0.5;">Date : {{ $facture->created_at }}</p>
         </div>
