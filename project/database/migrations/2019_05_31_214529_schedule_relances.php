@@ -14,7 +14,7 @@ class ScheduleRelances extends Migration
     public function up()
     {
         Schema::table('facture', function(Blueprint $table) {
-            $table->integer('status'); //0: Crée, 1: 1ère relance, 2: 2e relance, 3: 3e relance, 4: Contentieux
+            $table->integer('status'); //0: Crée, 1: 1ère relance, 2: 2e relance, 3: 3e relance, 4: Contentieux //5: Payé
         });
 
         Schema::table('dossier', function(Blueprint $table) {

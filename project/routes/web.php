@@ -24,9 +24,12 @@ Route::get('/template-devis', 'DevisTemplateController@index', function (){
 Route::get('/template-facture', 'HomeController@facture')->name('templates.factureTemplate');
 
 
+Route::group(['prefix' => '/facture'], function (){
+    Route::get('/generate/{id}', 'FactureController@index')->name('facture.generate');
+    Route::post('/generate/{id}', 'FactureController@store')->name('facture.create');
+    Route::get('/close/{id}', 'DossierController@close')->name('facture.close');
+});
 
-Route::get('/facture/generate/{id}', 'FactureController@index')->name('facture.generate');
-Route::post('/facture/generate/{id}', 'FactureController@store')->name('facture.create');
 
 Route::get('/dossiers/all', 'DossierController@index')->name('dossiers');
 

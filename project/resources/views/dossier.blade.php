@@ -34,7 +34,11 @@
                     <td><a class="btn btn-primary" href="{{ url($dossier->devis) }}">Devis (PDF)</a></td>
                     @if ($dossier->facture != null)
                         <td><a class="btn btn-primary" href="{{ url($dossier->facture) }}">Facture (PDF)</a></td>
-                        <td><span class="badge badge-warning">Relance {{ \App\Facture::find($dossier->facture_id)->getRelance() }}</span><a class="btn btn-primary" href="#">Valider le paiement</a></td>
+                        @if (\App\Facture::find($dossier->facture_id)->status != 5)
+                            <td><span class="badge badge-warning">Relance {{ \App\Facture::find($dossier->facture_id)->getRelance() }}</span><a class="btn btn-primary" href="{{ route('facture.close', [$dossier->facture_id]) }}">Valider le paiement</a></td>
+                        @else 
+                            <td><span class="badge badge-info">Paiement validé</span></td>
+                        @endif
                     @else
                         <td><a href="{{ route('facture.generate', [$dossier->id]) }}">Terminer le projet et éditer une facture</a> </td>
                     @endif
