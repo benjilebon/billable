@@ -12,6 +12,13 @@ class UserController extends Controller
         ->where('is_validated', '=', 0)
         ->get();
 
-        return view('dashboard', ['devis' => $devis]);
+        $facture = DB::table('facture')
+        ->get();
+
+        $dossier = DB::table('facture')
+        ->where('status', '=', '5')
+        ->get();
+
+        return view('dashboard', ['devis' => $devis, 'facture' => $facture, 'dossier' => $dossier]);
     }
 }

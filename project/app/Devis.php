@@ -40,6 +40,21 @@ class Devis extends Model
         return $this->quantity * $this->pu;
     }
 
+    public function getTotalTTC() {
+        return (float) ($this->getTotalHT()*(float) '1.'.$this->tva);
+    }
+
+    public function paymentConditionsAsString() {
+        switch ($this->payment_conditions) {
+            case 0:
+                return 'Acompte à la signature';
+                break;
+            case 1:
+                return 'Paiement comptant';
+                break;
+        }
+    }
+
 }
 
 

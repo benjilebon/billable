@@ -7,6 +7,7 @@ use App\Devis;
 use App\Dossier;
 use App\Http\Requests\StoreFacture;
 use Illuminate\Auth\Events\Registered;
+use App\Notifications\TemplateEmail;
 use App\Facture;
 use PDF;
 use Storage;
