@@ -41,7 +41,8 @@ class Devis extends Model
     }
 
     public function getTotalTTC() {
-        return (float) ($this->getTotalHT()*(float) '1.'.$this->tva);
+        $floattva = '1.'.$this->tva;
+        return $this->getTotalHT() * (float) $floattva;
     }
 
     public function paymentConditionsAsString() {
